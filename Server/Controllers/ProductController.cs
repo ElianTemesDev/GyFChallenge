@@ -23,7 +23,7 @@ namespace Server.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<ProductDTO>>> GetAllProducts()
+        public async Task<ActionResult<IEnumerable<ProductDTO>>> GetAllProducts()
         {
             return await _service.GetAll();
         }

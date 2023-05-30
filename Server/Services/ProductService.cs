@@ -16,7 +16,7 @@ namespace Server.Services
             _context = context;
         }
 
-        public async Task<ActionResult<List<ProductDTO>>> GetAll()
+        public async Task<ActionResult<IEnumerable<ProductDTO>>> GetAll()
         {
             List<Product> products = await _context.Products.ToListAsync();
             List<ProductDTO> result = new();
@@ -59,10 +59,8 @@ namespace Server.Services
             List<Product> productsTypeOne;
             List<Product> productsTypeTwo;
 
-            productsTypeOne = products.FindAll(x => x.Category == "PRODUNO");
-            productsTypeOne.OrderBy(x => x.Price);
-            productsTypeTwo = products.FindAll(x => x.Category == "PRODDOS");
-            productsTypeTwo.OrderBy(x => x.Price);
+            productsTypeOne = products.FindAll(x => x.Category == "PRODUNO").OrderByDescending(x => x.Price).ToList();
+            productsTypeTwo = products.FindAll(x => x.Category == "PRODDOS").OrderByDescending(x => x.Price).ToList();
 
             return "";
         }
