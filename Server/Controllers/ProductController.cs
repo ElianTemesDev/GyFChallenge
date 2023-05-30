@@ -5,7 +5,7 @@ using Server.Services.Interfaces;
 namespace Server.Controllers
 {
     [ApiController]
-    [Route("api/product")]
+    [Route("api")]
     public class ProductController : ControllerBase
     {
         private static readonly string[] Categories = new[]
@@ -22,25 +22,25 @@ namespace Server.Controllers
             _service = service;
         }
 
-        [HttpGet]
+        [HttpGet("products")]
         public async Task<ActionResult<IEnumerable<ProductDTO>>> GetAllProducts()
         {
             return await _service.GetAll();
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("product")]
         public async Task<ActionResult<ProductDTO>> GetById(int id)
         {
             return await _service.GetById(id);
         }
 
-        [HttpPost]
+        [HttpPost("product")]
         public async Task<ActionResult<ProductDTO>> Post(ProductDTO prod)
         {
             return await _service.Post(prod);
         }
 
-        [HttpGet("/sale/{budget}")]
+        [HttpGet("product/sale")]
         public async Task<ActionResult<string>> Sale(int budget)
         {
             return await _service.Sale(budget);
