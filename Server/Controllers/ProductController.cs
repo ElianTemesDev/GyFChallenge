@@ -1,31 +1,49 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Server.Context;
-using Server.Models;
+using Server.DTOs;
+using Server.Services.Interfaces;
 
 namespace Server.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/product")]
     public class ProductController : ControllerBase
     {
         private static readonly string[] Categories = new[]
         {
             "PRODUNO", "PRODDOS"
         };
-        private readonly CommerceContext _context;
+        
+        private readonly IProductService _service;
         private readonly ILogger<ProductController> _logger;
 
-        public ProductController(ILogger<ProductController> logger, CommerceContext context)
+        public ProductController(ILogger<ProductController> logger, IProductService service)
         {
             _logger = logger;
-            _context = context;
+            _service = service;
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Product>>> GetProducts()
+        public async Task<ActionResult<List<ProductDTO>>> GetAllProducts()
         {
-            return await _context.Products.ToListAsync();
+            return await _service.GetAll();
+        }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<ProductDTO>> GetById(int id)
+        {
+            return await _service.GetById(id);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<ProductDTO>> Post(ProductDTO prod)
+        {
+            return await _service.Post(prod);
+        }
+
+        [HttpGet("/sale/{budget}")]
+        public async Task<ActionResult<string>> Sale(int budget)
+        {
+            return await _service.Sale(budget);
         }
     }
 }

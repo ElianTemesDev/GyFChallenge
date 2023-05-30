@@ -15,8 +15,14 @@ namespace Server
         public void Seed()
         {
             modelBuilder.Entity<Product>().HasData(
-                   new Product() { Id = 1, Price = 3500, Category = "PRODUNO" },
-                   new Product() { Id = 2, Price = 2500, Category = "PRODDOS" }
+                   new Product(1, 150, "PRODUNO"),
+                   new Product(2, 180, "PRODUNO"),
+                   new Product(3, 15, "PRODUNO"),
+                   new Product(4, 20, "PRODUNO"),
+                   new Product(5, 250, "PRODDOS"),
+                   new Product(6, 500, "PRODDOS"),
+                   new Product(7, 5, "PRODDOS"),
+                   new Product(8, 800, "PRODDOS")
             );
         }
     }
