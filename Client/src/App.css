@@ -1,0 +1,20 @@
+.nav-logo {
+  height: 80px;
+  width: 80px;
+}
+.toastyToast{
+  position:absolute;
+  right: 40px;
+  width: 200px
+}
+.budgetResult{
+  margin-top: 15px;
+  margin-bottom: 100px;
+  font-size: 15px;
+}
+.refreshProductsButton{
+  position:absolute;
+  top: 35px;
+  left: 40px;
+  width: 200px
+}
